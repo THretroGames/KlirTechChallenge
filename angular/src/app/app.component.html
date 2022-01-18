@@ -1,6 +1,10 @@
 <body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
+    <h1>{{ title }}</h1>
+    <ul>
+      <li *ngFor="let p of products">{{ p.id }} - {{ p.name }}</li>
+    </ul>
     <router-outlet></router-outlet>
   </div>
 </body>
