@@ -1,29 +1,13 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { environment } from "src/environments/environment";
+import { Product } from "./_models/product";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit {
-  title = "KlirTechChallenge";
-  products: any;
+  constructor() {}
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.getProducts();
-  }
-
-  getProducts() {
-    this.http.get("http://localhost:5000/api/products").subscribe(
-      (response) => {
-        this.products = response;
-        console.log(this.products);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  ngOnInit() {}
 }

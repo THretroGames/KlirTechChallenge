@@ -1,0 +1,23 @@
+<div class="card mb-4">
+  <div class="card-body p1">
+    <h6 class="card title text-center mb-1">
+      {{ product.name }}
+    </h6>
+    <p class="card-text text-muted text-center">
+      Price: &euro; {{ product.price }}
+    </p>
+    <p *ngIf="product.promotion" class="card-text text-info text-center">
+      {{ product.promotion?.name }}
+    </p>
+    <p
+      *ngIf="!product.promotion"
+      class="card-text text-muted text-center"
+      style="visibility: hidden"
+    >
+      sdfdsfsdfdfs
+    </p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+      <button type="button" class="btn btn-primary">Add To Cart</button>
+    </div>
+  </div>
+</div>
