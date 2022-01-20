@@ -1,1 +1,69 @@
-<p>shopping-cart works!</p>
+<div class="row justify-content-around">
+  <table class="table table-striped col-8 table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Quantidy</th>
+        <th scope="col">Price</th>
+        <th scope="col">Total</th>
+        <th scope="col">Promotion Applied</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of shoppingCartService.cartProduct">
+        <th scope="row">{{ c.product.name }}</th>
+        <td>
+          <div class="row">
+            <button type="button" class="btn btn-primary col-1">-</button>
+            <input
+              type="text"
+              class="form-control col-4"
+              placeholder=""
+              style="width: 10px"
+              [value]="c.quantidy"
+            />
+            <button type="button" class="btn btn-primary col-1">+</button>
+          </div>
+          <!-- <input
+            type="text"
+            class="form-control col-4"
+            placeholder=""
+            style="width: 10px"
+            [value]="c.quantidy"
+          /> -->
+          <!-- <div class="input-group" role="group">
+            <button type="button" class="btn btn-primary">-</button>
+            <input
+              type="text"
+              class="form-control col-4"
+              placeholder=""
+              style="width: 10px"
+              [value]="c.quantidy"
+            />
+            <button type="button" class="btn btn-primary">+</button>
+          </div> -->
+        </td>
+        <td class="h6">&euro;{{ c.product.price }}</td>
+        <td class="h6">&euro;{{ c.totalPrice }}</td>
+        <td class="text-info h6">{{ c.promotionApplied }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row justify-content-end col-3">
+    <div class="card">
+      <div class="card-header">Order Summary</div>
+      <div class="card-body">
+        <div class="row">
+          <p class="card-text col-6">2 produtos</p>
+          <p class="card-text col-6">R$ 909,98</p>
+          <p class="card-text text-info col-6 mt-1">You Saved</p>
+          <p class="card-text text-info col-6 mt-1">R$ 909,98</p>
+          <h5 class="card-title col-6 mt-5">Total</h5>
+          <h5 class="card-title col-6 mt-5">R$ 909,98</h5>
+        </div>
+        <a href="#" class="btn btn-primary">Check Out</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -34,7 +34,13 @@
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/shopping-cart']"
-              >Shopping Cart</a
+              >Shopping Cart
+              <span
+                *ngIf="shoppingCartService.GetProductsQuantidy()"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
+              >
+                {{ shoppingCartService.GetProductsQuantidy() }}
+              </span></a
             >
           </li>
         </ul>

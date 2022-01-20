@@ -8,16 +8,15 @@ import { Product } from "../_models/product";
   providedIn: "root",
 })
 export class ProductsService {
-  products: Product;
+  products: Product[];
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getProducts() {
-    return this.http.get<Product[]>(this.baseUrl + "products");
-  }
-
-  getProduct() {
-    return this.http.get<Product[]>(this.baseUrl + "products/1");
+  loadProducts() {
+    this.http.get<Product[]>(this.baseUrl + "products").subscribe(products => {
+      this.products = products});
+    // this.http.get<Product[]>(this.baseUrl + "products/random-list").subscribe(products => {
+    //   this.products = products});
   }
 }
