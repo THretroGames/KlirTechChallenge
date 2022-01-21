@@ -16,10 +16,10 @@ export class NavMenuComponent implements OnInit {
   }
 
   LoadLocalStorage() {
-    let p = localStorage.getItem("cartProducts");
-    if (p !== null) {
-      this.shoppingCartService.cartProduct = JSON.parse(
-        localStorage.getItem("cartProducts")
+    let c = localStorage.getItem("cart");
+    if (c !== null) {
+      this.shoppingCartService.shoppingCart = JSON.parse(
+        localStorage.getItem("cart")
       );
     }
   }

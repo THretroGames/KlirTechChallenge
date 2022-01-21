@@ -13,6 +13,7 @@ import { ProductsListComponent } from "./products/products-list/products-list.co
 import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 import { ProductCardComponent } from "./products/product-card/product-card.component";
 import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
+import { ShoppingCartTableComponent } from './shopping-cart/shopping-cart-table/shopping-cart-table.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
     ProductDetailComponent,
     ProductCardComponent,
     ShoppingCartComponent,
+    ShoppingCartTableComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

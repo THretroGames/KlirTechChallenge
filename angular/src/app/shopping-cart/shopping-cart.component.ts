@@ -10,5 +10,10 @@ export class ShoppingCartComponent implements OnInit {
   constructor(public shoppingCartService: ShoppingCartService) {}
 
   ngOnInit() {
+    this.shoppingCartService.UpdateCartOnServer();
+  }
+
+  TestUpdateCart() {
+    this.shoppingCartService.UpdateCartOnServer();
   }
 }

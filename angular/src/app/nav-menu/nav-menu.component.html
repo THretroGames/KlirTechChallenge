@@ -36,7 +36,7 @@
             <a class="nav-link text-dark" [routerLink]="['/shopping-cart']"
               >Shopping Cart
               <span
-                *ngIf="shoppingCartService.GetProductsQuantidy()"
+                *ngIf="shoppingCartService.shoppingCart.cartProductDtos != null && shoppingCartService.GetProductsQuantidy()"
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
               >
                 {{ shoppingCartService.GetProductsQuantidy() }}

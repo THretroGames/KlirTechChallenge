@@ -1,0 +1,31 @@
+<th scope="row">{{ cartProduct.name }}</th>
+<td>
+  <div class="row">
+    <button
+      type="button"
+      class="btn btn-primary col-1"
+      (click)="addQuantidy(-1)"
+    >
+      -
+    </button>
+    <input
+      [disabled]="disabled"
+      type="text"
+      class="form-control col-4"
+      placeholder=""
+      style="width: 10px"
+      [(ngModel)]="cartProduct.quantidy"
+      (keyup)="priceKeyUp($event)"
+    />
+    <button
+      type="button"
+      class="btn btn-primary col-1"
+      (click)="addQuantidy(1)"
+    >
+      +
+    </button>
+  </div>
+</td>
+<td class="h6">&euro;{{ cartProduct.price }}</td>
+<td class="h6">&euro;{{ cartProduct.totalPrice }}</td>
+<td class="text-info h6">{{ cartProduct.promotionApplied }}</td>
