@@ -11,31 +11,45 @@ export class ShoppingCartTableComponent implements OnInit {
   @Input() cartProduct: CartProduct;
   private timer: any;
   disabled = false;
-  quantidy = 0;
+  minValue = 1;
+  maxValue = 99;
 
   constructor(public shoppingCartService: ShoppingCartService) {}
 
-  ngOnInit() {
-    this.quantidy =
-      this.shoppingCartService.shoppingCart.cartProductDtos.length;
-  }
+  ngOnInit() {}
 
   priceKeyUp(e: any) {
-    this.cartProduct.quantidy = Number.parseInt(this.cartProduct.quantidy.toString());
+    this.checkQuantidy(e.target.value);
+    this.cartProduct.quantidy = Number.parseInt(
+      this.cartProduct.quantidy.toString()
+    );
     if (this.timer) {
       clearTimeout(this.timer);
     }
     this.timer = setTimeout(this.updateShoopingCart.bind(this), 600, this);
   }
 
+  checkQuantidy(value: string) {
+    value = value.replace("/r", "/");
+    let qtd = Number.parseInt(value);
+
+    if (qtd < this.minValue) this.cartProduct.quantidy = this.minValue;
+    if (qtd > this.maxValue) this.cartProduct.quantidy = this.maxValue;
+  }
+
   updateShoopingCart() {
     this.disabled = true;
-    var lala = this.shoppingCartService.UpdateCartOnServer();
+    this.shoppingCartService.UpdateCartOnServer();
   }
 
   addQuantidy(quantidy: number) {
-    quantidy > 0 ? (this.disabled = true) : (this.disabled = false);
     this.cartProduct.quantidy += quantidy;
+    this.checkQuantidy(this.cartProduct.quantidy.toString());
     this.shoppingCartService.UpdateCartOnServer();
+  }
+
+  RemoveProduct() {
+    this.shoppingCartService.RemoveProduct(this.cartProduct.productId);
+    this.cartProduct = null;
   }
 }

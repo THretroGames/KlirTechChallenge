@@ -40,11 +40,11 @@ namespace Klir.TechChallenge.Web.Api.Services.Cart
                 Product prod = await _productService.GetProductAsync(c.ProductId);
                 CartProductService cps = GetProductService(prod, c.Quantidy);
                 CartProductDto cartProductDto = GetCartProductDto(cps);
+                ShoppingCartDto.Quantidy += cps.CartProduct.Quantidy;
                 ShoppingCartDto.CartProductDtos.Add(cartProductDto);
-                ShoppingCartDto.TotalPrice += cps.TotalPrice;
-                // cartProductDto.Quantidy = cps.Quantidy;
-                // cartProductDto.TotalPrice = cps.TotalPrice;
-                // cartProductDto.PromotionApplied = cps.PromotionApplied;
+                ShoppingCartDto.TotalPrice += cps.CartProduct.TotalPrice;
+                ShoppingCartDto.OriginalPrice += cps.CartProduct.OriginalPrice;
+                ShoppingCartDto.Saved += cps.CartProduct.Saved;
             }
             return true;
         }
@@ -68,7 +68,7 @@ namespace Klir.TechChallenge.Web.Api.Services.Cart
         public CartProductDto GetCartProductDto(CartProductService cartProductService)
         {
             CartProductDto cartProductDto = new CartProductDto();
-            cartProductDto = _mapper.Map<CartProductDto>(cartProductService);
+            cartProductDto = _mapper.Map<CartProductDto>(cartProductService.CartProduct);
             return cartProductDto;
         }
 

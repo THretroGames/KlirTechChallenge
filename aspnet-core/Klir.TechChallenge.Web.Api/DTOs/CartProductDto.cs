@@ -12,7 +12,10 @@ namespace Klir.TechChallenge.Web.Api.DTOs
         public string Name { get; set; }
         public int Quantidy { get; set; }
         public decimal Price { get; set; }
+        public decimal OriginalPrice { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal Saved { get; set; }
+        public string Promotion { get; set; }
         public string PromotionApplied { get; set; }
     }
 }

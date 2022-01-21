@@ -15,10 +15,11 @@ namespace Klir.TechChallenge.Web.Api.Helpers
         {
             CreateMap<Product, ProductDto>().ForMember(dest => dest.Promotion, opt => opt.MapFrom(src => src.Promotion.Name));
 
-            CreateMap<CartProductService, CartProductDto>().
+            CreateMap<CartProduct, CartProductDto>().
             ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Product.Name)).
             ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price)).
-            ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id));
+            ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id)).
+            ForMember(dest => dest.Promotion, opt => opt.MapFrom(src => src.Product.Promotion.Name));
         }
     }
 }

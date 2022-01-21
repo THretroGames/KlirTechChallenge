@@ -13,21 +13,21 @@ namespace Klir.TechChallenge.Web.Api.Services.Cart
         {
         }
 
-        protected override decimal CalculateTotalPrice()
+        protected override void CalculateProduct()
         {
-            decimal q = Quantidy / 3;
+            decimal q = CartProduct.Quantidy / 3;
             int d = (int)Math.Floor(q);
 
             decimal discount = d * 10m;
-            decimal totalPrice = ((Quantidy - (d * 3)) * Product.Price);
+            decimal totalPrice = ((CartProduct.Quantidy - (d * 3)) * CartProduct.Product.Price);
             decimal totalPriceWithDiscount = totalPrice + discount;
 
-            if(Quantidy >= 3)
+            if(CartProduct.Quantidy >= 3)
             {
-                PromotionApplied = Product.Promotion.Name;
+                CartProduct.PromotionApplied = CartProduct.Product.Promotion.Name;
             }
 
-            return totalPriceWithDiscount;
+            CartProduct.TotalPrice = totalPriceWithDiscount;
         }
     }
 }

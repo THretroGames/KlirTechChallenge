@@ -9,19 +9,23 @@ namespace Klir.TechChallenge.Web.Api.Abstracts
 {
     public abstract class CartProductService
     {
-        public Product Product { get; protected set; }
-        public int Quantidy { get; protected set; }
-        public decimal TotalPrice { get; protected set; }
-        public string PromotionApplied { get; protected set; }
+        public CartProduct CartProduct { get; protected set; }
 
         public CartProductService(Product product, int quantidy = 1)
         {
-            Product = product;
-            Quantidy = quantidy;
-            PromotionApplied = string.Empty;
-            TotalPrice = CalculateTotalPrice();
+            CartProduct = new CartProduct();
+            CartProduct.Product = product;
+            CartProduct.Quantidy = quantidy;
+            CartProduct.PromotionApplied = string.Empty;
+            CalculateProduct();
+            CalculateDiscount();
         }
 
-        protected abstract decimal CalculateTotalPrice();
+        private void CalculateDiscount(){
+            CartProduct.OriginalPrice = CartProduct.Product.Price * CartProduct.Quantidy;
+            CartProduct.Saved = CartProduct.OriginalPrice - CartProduct.TotalPrice;
+        }
+
+        protected abstract void CalculateProduct();
     }
 }

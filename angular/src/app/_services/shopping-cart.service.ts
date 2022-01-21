@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
 import { ShoppingCartTableComponent } from "../shopping-cart/shopping-cart-table/shopping-cart-table.component";
 import { CartProduct } from "../_models/cart-product";
@@ -14,7 +15,7 @@ export class ShoppingCartService {
   public shoppingCart: ShoppingCart;
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router) {
     this.shoppingCart = { cartProductDtos: [], totalPrice: 0 };
   }
 
@@ -49,6 +50,7 @@ export class ShoppingCartService {
   }
 
   UpdateCartOnServer() {
+    localStorage.clear();
     this.http
       .put<ShoppingCart>(
         this.baseUrl + "shoppingcart/update",
@@ -74,5 +76,21 @@ export class ShoppingCartService {
 
   ClearLocalStorage() {
     localStorage.clear();
+  }
+
+  RemoveProduct(id: number) {
+    this.shoppingCart.cartProductDtos.forEach((element, index) => {
+      if (element.productId == id) {
+        this.shoppingCart.cartProductDtos.splice(index, 1);
+      }
+    });
+    this.ClearLocalStorage();
+    this.UpdateCartOnServer();
+  }
+
+  CheckOut() {
+    this.ClearLocalStorage();
+    this.shoppingCart = { cartProductDtos: [], totalPrice: 0 };
+    this._router.navigate(["/"]);
   }
 }

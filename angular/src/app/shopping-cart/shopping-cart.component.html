@@ -6,6 +6,7 @@
 >
   Empty Cart
 </h2>
+
 <div
   *ngIf="
     shoppingCartService.shoppingCart.cartProductDtos != null &&
@@ -13,14 +14,15 @@
   "
   class="row justify-content-around"
 >
-  <table class="table table-striped col-8 table-sm">
+  <table class="table table-striped col-9">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Name</th>
+        <th scope="col">Product Name</th>
         <th scope="col">Quantidy</th>
         <th scope="col">Price</th>
         <th scope="col">Total</th>
         <th scope="col">Promotion Applied</th>
+        <th scope="col">Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -37,16 +39,42 @@
       <div class="card-header">Order Summary</div>
       <div class="card-body">
         <div class="row">
-          <p class="card-text col-6">2 products</p>
-          <p class="card-text col-6">&euro; 909,98</p>
-          <p class="card-text text-info col-6 mt-1">You Saved</p>
-          <p class="card-text text-info col-6 mt-1">&euro; 909,98</p>
+          <p
+            *ngIf="shoppingCartService.shoppingCart.originalPrice == 1"
+            class="card-text col-6"
+          >
+            {{ shoppingCartService.shoppingCart.quantidy }} product
+          </p>
+          <p
+            *ngIf="shoppingCartService.shoppingCart.originalPrice > 1"
+            class="card-text col-6"
+          >
+            {{ shoppingCartService.shoppingCart.quantidy }} products
+          </p>
+          <p *ngIf="shoppingCartService.shoppingCart.saved > 0" class="card-text col-6" style="text-decoration: line-through">
+            &euro; {{ shoppingCartService.shoppingCart.originalPrice }}
+          </p>
+          <p *ngIf="shoppingCartService.shoppingCart.saved <= 0" class="card-text col-6">
+            &euro; {{ shoppingCartService.shoppingCart.originalPrice }}
+          </p>          
+          <p
+            *ngIf="shoppingCartService.shoppingCart.saved > 0"
+            class="card-text text-info col-6 mt-1"
+          >
+            You Saved
+          </p>
+          <p
+            *ngIf="shoppingCartService.shoppingCart.saved > 0"
+            class="card-text text-info col-6 mt-1"
+          >
+            &euro; {{ shoppingCartService.shoppingCart.saved }}
+          </p>
           <h5 class="card-title col-6 mt-5">Total</h5>
-          <h5 class="card-title col-6 mt-5">&euro; 909,98</h5>
+          <h5 class="card-title col-6 mt-5">&euro; {{ shoppingCartService.shoppingCart.totalPrice }}</h5>
         </div>
         <button
           type="button"
-          (click)="TestUpdateCart()"
+          (click)="CheckOut()"
           class="btn btn-primary"
         >
           Check Out

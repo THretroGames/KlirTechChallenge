@@ -27,7 +27,7 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult<ShoppingCartDto>> UpdateCart([FromBody]IEnumerable<CartProductDto> cartProducts)
+        public async Task<ActionResult<ShoppingCartDto>> UpdateCart([FromBody] IEnumerable<CartProductDto> cartProducts)
         {
             var cart = await _cartService.GetShoppingCart(cartProducts);
 
@@ -39,7 +39,7 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
         [HttpPost]
         [Route("Test")]
-        public async Task<ActionResult<int>> Test([FromBody]CartProductDto cartProduct)
+        public async Task<ActionResult<int>> Test([FromBody] CartProductDto cartProduct)
         {
             string r = cartProduct.Name + " TH";
             return Ok(r);

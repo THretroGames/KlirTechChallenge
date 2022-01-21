@@ -5,6 +5,9 @@ export interface CartProduct {
   name: string;
   price: number;
   quantidy: number;
+  originalPrice?: number;
+  saved?: number;
   totalPrice?: number;
+  promotion?: string;
   promotionApplied?: string;
 }

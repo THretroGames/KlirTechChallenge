@@ -14,6 +14,9 @@ namespace Klir.TechChallenge.Web.Api.DTOs
 
         //public int Id { get; set; }
         public List<CartProductDto> CartProductDtos { get; set; }
+        public decimal OriginalPrice { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal Saved { get; set; }
+        public int Quantidy { get; set; }
     }
 }

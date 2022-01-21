@@ -13,9 +13,9 @@ namespace Klir.TechChallenge.Web.Api.Services.Cart
         {
         }
 
-        protected override decimal CalculateTotalPrice()
+        protected override void CalculateProduct()
         {
-            return Product.Price * Quantidy;
+            CartProduct.TotalPrice = CartProduct.Product.Price * CartProduct.Quantidy;
         }
     }
 }

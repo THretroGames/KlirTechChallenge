@@ -7,13 +7,15 @@ import { ShoppingCartService } from "../_services/shopping-cart.service";
   styleUrls: ["./shopping-cart.component.css"],
 })
 export class ShoppingCartComponent implements OnInit {
-  constructor(public shoppingCartService: ShoppingCartService) {}
+  constructor(
+    public shoppingCartService: ShoppingCartService,
+  ) {}
 
   ngOnInit() {
     this.shoppingCartService.UpdateCartOnServer();
   }
 
-  TestUpdateCart() {
-    this.shoppingCartService.UpdateCartOnServer();
+  CheckOut() {
+    this.shoppingCartService.CheckOut();
   }
 }
