@@ -1,4 +1,8 @@
 using Klir.TechChallenge.Web.Api.Data;
+using Klir.TechChallenge.Web.Api.Helpers;
+using Klir.TechChallenge.Web.Api.Interfaces;
+using Klir.TechChallenge.Web.Api.Services;
+using Klir.TechChallenge.Web.Api.Services.Cart;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +46,12 @@ namespace KlirTechChallenge.Web.Api
             {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            //services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+            services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddControllers();
         }
 

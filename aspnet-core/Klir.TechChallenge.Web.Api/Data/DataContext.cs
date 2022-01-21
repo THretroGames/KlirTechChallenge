@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Klir.TechChallenge.Web.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Klir.TechChallenge.Web.Api.Data
@@ -12,7 +13,9 @@ namespace Klir.TechChallenge.Web.Api.Data
         {
         }
 
-        public DbSet<Entities.Product> Products { get; set; }
-        public DbSet<Entities.Promotion> Promotions { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<CartProduct> CartProducts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

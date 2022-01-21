@@ -3,14 +3,16 @@ using System;
 using Klir.TechChallenge.Web.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Klir.TechChallenge.Web.Api.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220119211819_ShoppingCart")]
+    partial class ShoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace Klir.TechChallenge.Web.Api.Data.Migrations
 
                     b.HasIndex("ShoppingCartId");
 
-                    b.ToTable("CartProducts");
+                    b.ToTable("CartProduct");
                 });
 
             modelBuilder.Entity("Klir.TechChallenge.Web.Api.Entities.Product", b =>
@@ -93,7 +95,7 @@ namespace Klir.TechChallenge.Web.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("Klir.TechChallenge.Web.Api.Entities.CartProduct", b =>

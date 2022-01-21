@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Klir.TechChallenge.Web.Api.Data;
+using Klir.TechChallenge.Web.Api.DTOs;
 using Klir.TechChallenge.Web.Api.Entities;
+using Klir.TechChallenge.Web.Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Klir.TechChallenge.Web.Api.Controllers
 {
@@ -13,27 +16,30 @@ namespace Klir.TechChallenge.Web.Api.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly ILogger<ProductsController> _logger;
+        private readonly IProductService _productService;
 
-        public ProductsController(DataContext context)
+        public ProductsController(ILogger<ProductsController> logger, IProductService productService)
         {
-            _context = context;
+            _productService = productService;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            var products = await _context.Products.Include(c => c.Promotion).ToListAsync();
+            var products = await _productService.GetProductsDtoAsync();
 
-            return products;
+            return Ok(products);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        [HttpGet]
+        [Route("random-list")]
+        public ActionResult<IEnumerable<ProductDto>> GetRandomProducts()
         {
-            var product = await _context.Products.FindAsync(id);
+            var products = _productService.GetRandomProductsDto();
 
-            return product;
+            return Ok(products);
         }
     }
 }
