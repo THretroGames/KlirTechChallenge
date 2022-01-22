@@ -44,7 +44,7 @@ namespace KlirTechChallenge.Tests
         {
             //Arrange
             var cartService = ServiceProvider.GetService<IShoppingCartService>();
-            IEnumerable<CartProductDto> prods = Enumerable.Empty<CartProductDto>();
+            IEnumerable<RequestCartProductDto> prods = Enumerable.Empty<RequestCartProductDto>();
 
             //Act
             var r = await cartService.GetShoppingCart(prods);
@@ -59,11 +59,11 @@ namespace KlirTechChallenge.Tests
             //Arrange
             var cartService = ServiceProvider.GetService<IShoppingCartService>();
 
-            CartProductDto cart = new CartProductDto();
+            RequestCartProductDto cart = new RequestCartProductDto();
             cart.ProductId = 1;
             cart.Quantidy = 3;
 
-            IEnumerable<CartProductDto> prods = new List<CartProductDto>() { cart };
+            IEnumerable<RequestCartProductDto> prods = new List<RequestCartProductDto>() { cart };
 
             //Act
             var r = await cartService.GetShoppingCart(prods);
@@ -529,19 +529,19 @@ namespace KlirTechChallenge.Tests
             //Arrange
             var cartService = ServiceProvider.GetService<IShoppingCartService>();
 
-            CartProductDto cart = new CartProductDto();
+            RequestCartProductDto cart = new RequestCartProductDto();
             cart.ProductId = 1;
             cart.Quantidy = 3;
 
-            CartProductDto cart2 = new CartProductDto();
+            RequestCartProductDto cart2 = new RequestCartProductDto();
             cart2.ProductId = 2;
             cart2.Quantidy = 6;
 
-            CartProductDto cart3 = new CartProductDto();
+            RequestCartProductDto cart3 = new RequestCartProductDto();
             cart3.ProductId = 3;
             cart3.Quantidy = 9;
 
-            IEnumerable<CartProductDto> prods = new List<CartProductDto>() { cart, cart2, cart3 };
+            IEnumerable<RequestCartProductDto> prods = new List<RequestCartProductDto>() { cart, cart2, cart3 };
 
             //Act
             var c = await cartService.GetShoppingCart(prods);

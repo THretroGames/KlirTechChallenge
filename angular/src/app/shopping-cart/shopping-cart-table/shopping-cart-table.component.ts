@@ -15,6 +15,7 @@ export class ShoppingCartTableComponent implements OnInit {
   maxValue = 99;
 
   constructor(public shoppingCartService: ShoppingCartService) {}
+  quantidy: number;
 
   ngOnInit() {}
 
@@ -23,6 +24,8 @@ export class ShoppingCartTableComponent implements OnInit {
     this.cartProduct.quantidy = Number.parseInt(
       this.cartProduct.quantidy.toString()
     );
+    this.quantidy = Number.parseInt(e.target.value);
+    console.log("this.quantidy = " + this.quantidy);
     if (this.timer) {
       clearTimeout(this.timer);
     }
@@ -38,6 +41,8 @@ export class ShoppingCartTableComponent implements OnInit {
   }
 
   updateShoopingCart() {
+    console.log("this.quantidy 2 = " + this.quantidy);
+    this.cartProduct.quantidy = this.quantidy;
     this.disabled = true;
     this.shoppingCartService.UpdateCartOnServer();
   }
