@@ -27,7 +27,7 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult<ShoppingCartDto>> UpdateCart([FromBody] IEnumerable<CartProductDto> cartProducts)
+        public async Task<ActionResult<ShoppingCartDto>> UpdateCart([FromBody] IEnumerable<RequestCartProductDto> cartProducts)
         {
             var cart = await _cartService.GetShoppingCart(cartProducts);
 
@@ -35,14 +35,6 @@ namespace Klir.TechChallenge.Web.Api.Controllers
                 return BadRequest("Was not possible to create the shopping cart");
 
             return Ok(cart);
-        }
-
-        [HttpPost]
-        [Route("Test")]
-        public async Task<ActionResult<int>> Test([FromBody] CartProductDto cartProduct)
-        {
-            string r = cartProduct.Name + " TH";
-            return Ok(r);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Klir.TechChallenge.Web.Api.Interfaces
     public interface IProductService
     {
         Task<IEnumerable<ProductDto>> GetProductsDtoAsync();
+        Task<IEnumerable<Product>> GetProductsAsync();
         Task<Product> GetProductAsync(int id);
-        IEnumerable<ProductDto> GetRandomProductsDto();
     }
 }

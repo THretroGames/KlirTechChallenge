@@ -35,29 +35,5 @@ namespace Klir.TechChallenge.Web.Api.Services
         {
             return await _productRepo.GetProductAsync(id);
         }
-
-
-
-
-        //only for test
-        public IEnumerable<ProductDto> GetRandomProductsDto()
-        {
-            List<ProductDto> products = new List<ProductDto>();
-            List<string> promotions = new List<string>();
-            promotions.Add("");
-            promotions.Add("Buy 1 Get 1 Free");
-            promotions.Add("3 for 10 Euro");
-            int quantity = new Random().Next(5, 21);
-            for (int i = 0; i < quantity; i++)
-            {
-                ProductDto p = new ProductDto();
-                p.Id = i;
-                p.Name = "Product " + i;
-                p.Price = new Random().Next(2, 51);
-                p.Promotion = promotions[new Random().Next(0, 3)];
-                products.Add(p);
-            }
-            return products;
-        }
     }
 }

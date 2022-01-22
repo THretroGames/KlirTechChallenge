@@ -25,21 +25,21 @@ namespace Klir.TechChallenge.Web.Api.Services.Cart
             ShoppingCartDto.TotalPrice = 0m;
         }
 
-        public async Task<ShoppingCartDto> GetShoppingCart(IEnumerable<CartProductDto> cartProdutcs)
+        public async Task<ShoppingCartDto> GetShoppingCart(IEnumerable<RequestCartProductDto> cartProdutcs)
         {
             await CalculateCart(cartProdutcs.ToList());
             return ShoppingCartDto;
         }
 
-        public async Task<bool> CalculateCart(List<CartProductDto> cartProdutcs)
+        private async Task<bool> CalculateCart(List<RequestCartProductDto> cartProdutcs)
         {
             ShoppingCartDto cartDto = new ShoppingCartDto();
 
-            foreach (CartProductDto c in cartProdutcs)
+            foreach (RequestCartProductDto c in cartProdutcs)
             {
                 Product prod = await _productService.GetProductAsync(c.ProductId);
                 CartProductService cps = GetProductService(prod, c.Quantidy);
-                CartProductDto cartProductDto = GetCartProductDto(cps);
+                CartProductDto cartProductDto = GetCartProductDto(cps.CartProduct);
                 ShoppingCartDto.Quantidy += cps.CartProduct.Quantidy;
                 ShoppingCartDto.CartProductDtos.Add(cartProductDto);
                 ShoppingCartDto.TotalPrice += cps.CartProduct.TotalPrice;
@@ -65,19 +65,11 @@ namespace Klir.TechChallenge.Web.Api.Services.Cart
             }
         }
 
-        public CartProductDto GetCartProductDto(CartProductService cartProductService)
+        private CartProductDto GetCartProductDto(CartProduct cartProduct)
         {
             CartProductDto cartProductDto = new CartProductDto();
-            cartProductDto = _mapper.Map<CartProductDto>(cartProductService.CartProduct);
+            cartProductDto = _mapper.Map<CartProductDto>(cartProduct);
             return cartProductDto;
         }
-
-        // protected void UpdateTotalPrice(List<CartProduct> CartProducts)
-        // {
-        //     foreach (CartProduct c in CartProducts)
-        //     {
-        //         TotalPrice += c.TotalPrice;
-        //     }
-        // }
     }
 }

@@ -9,6 +9,6 @@ namespace Klir.TechChallenge.Web.Api.Interfaces
 {
     public interface IShoppingCartService
     {
-        Task<ShoppingCartDto> GetShoppingCart(IEnumerable<CartProductDto> cartProdutcs);        
+        Task<ShoppingCartDto> GetShoppingCart(IEnumerable<RequestCartProductDto> cartProdutcs);        
     }
 }

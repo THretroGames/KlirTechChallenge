@@ -32,14 +32,5 @@ namespace Klir.TechChallenge.Web.Api.Controllers
 
             return Ok(products);
         }
-
-        [HttpGet]
-        [Route("random-list")]
-        public ActionResult<IEnumerable<ProductDto>> GetRandomProducts()
-        {
-            var products = _productService.GetRandomProductsDto();
-
-            return Ok(products);
-        }
     }
 }
