@@ -12,10 +12,10 @@ export class ShoppingCartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.shoppingCartService.UpdateCartOnServer();
+    this.shoppingCartService.updateCartOnServer();
   }
 
-  CheckOut() {
-    this.shoppingCartService.CheckOut();
+  checkOut() {
+    this.shoppingCartService.checkOut();
   }
 }

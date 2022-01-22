@@ -30,6 +30,9 @@ namespace Klir.TechChallenge.Web.Api.Controllers
         {
             var products = await _productService.GetProductsDtoAsync();
 
+            if(products == null)
+                return BadRequest("Was not possible to get the products");
+
             return Ok(products);
         }
     }

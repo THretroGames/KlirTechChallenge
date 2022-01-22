@@ -29,6 +29,9 @@ namespace Klir.TechChallenge.Web.Api.Controllers
         [Route("update")]
         public async Task<ActionResult<ShoppingCartDto>> UpdateCart([FromBody] IEnumerable<RequestCartProductDto> cartProducts)
         {
+            if (cartProducts == null)
+                return BadRequest("Invalid Parameters");
+
             var cart = await _cartService.GetShoppingCart(cartProducts);
 
             if (cart == null)

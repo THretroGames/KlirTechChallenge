@@ -21,11 +21,7 @@ export class ShoppingCartTableComponent implements OnInit {
 
   priceKeyUp(e: any) {
     this.checkQuantidy(e.target.value);
-    this.cartProduct.quantidy = Number.parseInt(
-      this.cartProduct.quantidy.toString()
-    );
-    this.quantidy = Number.parseInt(e.target.value);
-    console.log("this.quantidy = " + this.quantidy);
+    this.quantidy = this.cartProduct.quantidy;
     if (this.timer) {
       clearTimeout(this.timer);
     }
@@ -36,25 +32,26 @@ export class ShoppingCartTableComponent implements OnInit {
     value = value.replace("/r", "/");
     let qtd = Number.parseInt(value);
 
+    this.cartProduct.quantidy = qtd;
+
     if (qtd < this.minValue) this.cartProduct.quantidy = this.minValue;
     if (qtd > this.maxValue) this.cartProduct.quantidy = this.maxValue;
   }
 
   updateShoopingCart() {
-    console.log("this.quantidy 2 = " + this.quantidy);
     this.cartProduct.quantidy = this.quantidy;
     this.disabled = true;
-    this.shoppingCartService.UpdateCartOnServer();
+    this.shoppingCartService.updateCartOnServer();
   }
 
   addQuantidy(quantidy: number) {
     this.cartProduct.quantidy += quantidy;
     this.checkQuantidy(this.cartProduct.quantidy.toString());
-    this.shoppingCartService.UpdateCartOnServer();
+    this.shoppingCartService.updateCartOnServer();
   }
 
-  RemoveProduct() {
-    this.shoppingCartService.RemoveProduct(this.cartProduct.productId);
+  removeProduct() {
+    this.shoppingCartService.removeProduct(this.cartProduct.productId);
     this.cartProduct = null;
   }
 }
